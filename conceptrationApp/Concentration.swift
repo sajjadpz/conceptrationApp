@@ -10,10 +10,10 @@ import Foundation
 
 class Concentration {
     
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
     //computed property
-    var indexOfOneAndOnlyFaceUp: Int? {
+    private var indexOfOneAndOnlyFaceUp: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
@@ -35,6 +35,7 @@ class Concentration {
     }
     
     func choseCard(at index: Int){
+        assert(cards.indices.contains(index), "Concentration,choseCards(at: \(index)), invalid chosen index")
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUp, matchIndex != index {
                 //check if cards matched
@@ -50,6 +51,7 @@ class Concentration {
     }
     
     init(numberOfPairOfCards: Int) {
+        assert(numberOfPairOfCards > 0, "Concentration.init(at: \(numberOfPairOfCards)), invalid numberofPairOfCards")
         for _ in 0..<numberOfPairOfCards{
             let card = Card()
             cards += [card, card]//copies the card strcut to matching card
