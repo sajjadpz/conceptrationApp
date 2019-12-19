@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Concentration {
+struct Concentration {
     
     private(set) var cards = [Card]()
     
@@ -34,7 +34,7 @@ class Concentration {
         }
     }
     
-    func choseCard(at index: Int){
+    mutating func choseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration,choseCards(at: \(index)), invalid chosen index")
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUp, matchIndex != index {
