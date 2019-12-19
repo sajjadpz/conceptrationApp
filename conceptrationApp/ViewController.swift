@@ -12,11 +12,24 @@ class ViewController: UIViewController {
 
     private(set) var flipCount = 0 {
         didSet{
-            flipCountLabel.text = "Flips: \(flipCount)"
+                updateFlipCountLabel()
         }
     }
     
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    private func updateFlipCountLabel() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .strokeWidth : -3.0,
+            .strokeColor : UIColor.yellow
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
+    }
+    
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet{
+            updateFlipCountLabel()
+        }
+    }
     
     private lazy var game = Concentration(numberOfPairOfCards: (touchCards.count + 1) / 2)
     
